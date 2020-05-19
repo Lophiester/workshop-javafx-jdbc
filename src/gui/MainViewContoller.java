@@ -33,7 +33,7 @@ public class MainViewContoller implements Initializable {
 
 	@FXML
 	public void onMenuItemDepartmentAction() {
-		System.out.println("onMenuItemDepartmentAction");
+		LoadView("/gui/DepartmentList.fxml");
 	};
 
 	@FXML
@@ -47,38 +47,22 @@ public class MainViewContoller implements Initializable {
 	}
 
 	private void LoadView(String absoluteName) {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 
-			VBox newVbox = loader.load();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+
+		try {
+			VBox newVBox = loader.load();
+
 			Scene mainScene = Main.getMainScene();
 			VBox mainVbox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
 			Node mainMenu = mainVbox.getChildren().get(0);
 			mainVbox.getChildren().clear();
 			mainVbox.getChildren().add(mainMenu);
-			mainVbox.getChildren().addAll(newVbox.getChildren());
+			mainVbox.getChildren().addAll(newVBox.getChildren());
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Alerts.showAlert("IOException", null, e.getMessage(), AlertType.ERROR);
 		}
 
 	}
 }
-
-/*
- * FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName)); try
- * { VBox newVbox = loader.load(); Scene mainScene = Main.getMainScene();
- * 
- * VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent(); Node
- * mainMenu = mainVBox.getChildren().get(0); mainVBox.getChildren().clear();
- * mainVBox.getChildren().add(mainMenu);
- * mainVBox.getChildren().addAll(newVbox.getChildren());
- * 
- * } catch (IOException e) { Alerts.showAlert("Error load view", null,
- * e.getMessage(), AlertType.ERROR);
- * 
- * }
- * 
- * }
- */
