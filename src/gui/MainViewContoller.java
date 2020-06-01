@@ -52,7 +52,7 @@ public class MainViewContoller implements Initializable {
 
 	}
 
-	private synchronized <T> void LoadView(String absoluteName, Consumer<T> acaoDeInicializacao) {
+	private synchronized <T> void LoadView(String absoluteName, Consumer<T> acaoDeInicializao) {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 
@@ -66,7 +66,7 @@ public class MainViewContoller implements Initializable {
 			mainVbox.getChildren().add(mainMenu);
 			mainVbox.getChildren().addAll(newVBox.getChildren());
 			T controller = loader.getController();
-			acaoDeInicializacao.accept(controller);
+			acaoDeInicializao.accept(controller);
 		} catch (IOException e) {
 			Alerts.showAlert("IOException", null, e.getMessage(), AlertType.ERROR);
 		}
